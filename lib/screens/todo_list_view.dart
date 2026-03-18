@@ -92,7 +92,7 @@ class _TodoListViewState extends State<TodoListView> {
           )
         else if (filteredList.isEmpty)
           const EmptyState()
-        else
+        else ...[
           SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
               final todo = filteredList[index];
@@ -104,7 +104,8 @@ class _TodoListViewState extends State<TodoListView> {
               );
             }, childCount: filteredList.length),
           ),
-        const SliverPadding(padding: EdgeInsets.only(bottom: 100)),
+          const SliverPadding(padding: EdgeInsets.only(bottom: 100)),
+        ],
       ],
     );
   }
