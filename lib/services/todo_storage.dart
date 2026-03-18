@@ -15,7 +15,11 @@ class TodoStorage {
 
   Future<List<Todo>> loadTodos() async {
     await _init();
-    return await _isar!.todos.where().findAll();
+    final todos = await _isar!.todos.where().findAll();
+    for (final todo in todos) {
+      await todo.tags.load();
+    }
+    return todos;
   }
 
   Future<List<Tag>> loadTags() async {

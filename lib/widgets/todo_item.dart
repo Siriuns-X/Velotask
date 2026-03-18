@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:velotask/models/tag.dart';
 import 'package:velotask/models/todo.dart';
 import 'package:velotask/theme/app_theme.dart';
 import 'package:velotask/l10n/app_localizations.dart';
@@ -9,15 +8,12 @@ class TodoItem extends StatelessWidget {
   final VoidCallback onToggle;
   final VoidCallback onDelete;
   final VoidCallback onEdit;
-  final List<Tag>? visibleTags; // For testing or explicit tag display
-
   const TodoItem({
     super.key,
     required this.todo,
     required this.onToggle,
     required this.onDelete,
     required this.onEdit,
-    this.visibleTags,
   });
 
   Color _getImportanceColor() {
@@ -120,13 +116,13 @@ class TodoItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    if ((visibleTags ?? todo.tags).isNotEmpty)
+                    if (todo.tags.isNotEmpty)
                       Padding(
                         padding: const EdgeInsets.only(bottom: 4),
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
-                            children: (visibleTags ?? todo.tags).map((tag) {
+                            children: todo.tags.map((tag) {
                               Color tagColor = Colors.blue;
                               if (tag.color != null) {
                                 try {
